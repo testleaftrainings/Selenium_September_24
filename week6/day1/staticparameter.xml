@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="StaticParameterSuite" thread-count="5" parallel="tests"  verbose="5">
+	<parameter name="url" value="http://leaftaps.com/opentaps/control/main"></parameter>
+  <test  name="StaticTest1">
+	  <parameter name="user" value="DemoCsr"></parameter>
+	  <parameter name="pass" value="crmsfa"></parameter>
+    <parameter name="browser" value="chrome"></parameter>
+    <classes>
+      <class name="week6.day1.CreateLead"/>
+    </classes>
+  </test> <!-- Test -->
+  
+    
+  
+</suite> <!-- Suite -->
