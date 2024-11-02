@@ -1,0 +1,56 @@
+Today Agenda:
+
+02:30 - 03:45-Exception Handling
+03:45 - 04:15-BreakOut + Break
+04:15 - 05:30-POM with Extent Report
+05:30 - 06:00-BreakOut
+06:00 - 06:30-FrameWork Overview
+
+
+Exception:
+
+
+Error: we cannot handled by program's logic
+*OutofMemory error
+*stackoverflow 
+
+Exception: 
+ is an abnormal event that occurs during program execution
+
+ Two types:
+ 1.Complie time exception
+ 2.Run time exception
+
+
+
+
+
+
+
+
+
+Steps to Integrate Extent Report with POM:
+---------------------------------
+1. Create startReport() with @BeforeSuite in BaseClass or PSM and copy  step1 to step3 code from extent report
+2. Make ExtentReports as global  and static variable
+3. Create stopReport() with @AfterSuite to have extent.flush()
+4. Create testDetails() with @BeforeClass for test case details code
+5. Declare ExtentTest test as global and static variable
+6. Create 4 global variables testName, testDescription, testAuthor and testCategory
+7. Relace the hardcoded values with the respective variable names
+8. Assign the values for the variables in the setValues() in the testcases    @BeforeTest 
+9. Create reportStep(String stepDetails, String status) in the PSM with conditional implementation for pass / fail
+10. methods in pages should have try / catch implementation
+11. call the reportStep() with pass status from try block & with pass and fail status 
+
+
+BS
+BT
+BC
+DP
+BM
+@Test
+AM
+AC
+AT
+AS
