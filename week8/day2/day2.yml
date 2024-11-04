@@ -1,0 +1,162 @@
+ Hybrid Framework: 
+===========================
+	This framework is designed based on Page Object Model. 
+	We used Selenium WebDriver to interact with Web application, 
+	TestNg is used for test execution. 
+	Apache POI to read the data from excel to support multiple data testing. 
+	Cucumber is used to support the BDD approach and 
+	Extent report is used to get a html automation summary report.
+
+
+What are the components:
+=====================
+1. Browser and Element interfaces to design this framework
+com.framework.selenium.api.design
+
+2. SeleniumBase is the library for the Wrapper methods (implemented the interfaces)
+com.framework.selenium.api.base
+
+3. ProjectSpecificMethods as Base class having common methods specific to the project
+com.framework.selenium.testng.base
+
+4. pages package to have the classes for each page
+com.leaftaps.pages
+
+5. Testcases package to have the classes for each test case
+testcase or runner
+com.leaftaps.testcase
+
+6. Utils package to have the classes related to external applications
+	DataLibrary(to read data from excel)
+	Reporter(Configuration for ExtentReport)
+com.framework.utils
+
+7. Feature file
+feature
+
+
+Hirerarchy of Classes in the framework:
+========================================
+AbstractTestNGCucumberTests
+	DriverInstance
+		Reporter
+		  	SeleniumBase
+				ProjectSpecificMethods
+					Pages & Testcases
+
+
+          DriverInstance extends AbstractTestNGCucumberTests
+
+          Reporter extends DriverInstance
+
+          SeleiumBase etends Reporter Implements Browser,Element
+Execution Flow:
+===============
+@BeforeSuite --> Reporter (startReport)
+	@BeforeTest --> TestCase class (setValues)
+		@BeforeClass --> Reporter (report)
+			@DataProvider --> ProjectSpecificMethods
+				@BeforeMethod --> ProjectSpecificMethods
+					@Test --> TestCase class
+				@AfterMethod --> ProjectSpecificMethods
+		@AfterClass --> No Method
+	@AfterTest --> No Method
+@AfterSuite	--> Reporter
+
+https://login.salesforce.com/?locale=in
+Username :dilip@testleaf.com
+Password :leaf@2024
+
+com.leafBot.pages
+com.leafBot.selenium.api.base
+com.leafBot.selenium.api.design
+com.leafBot.TestCase
+com.leafBot.testng.api.base
+utils
+
+
+*utils
+*pages
+*Testcases
+*testngbase
+
+
+
+
+
+
+What is inheritance and where are you using in your automation
+
+a) What it is? Inheritance is special Object oriented concept where a sub class inherit from the parent class (methods, fields). Can be applied to others like interface, annotation, enum as well.
+     Keyword: extends
+     Purpose: Reusability and maintenance
+     Types: Single and Multi-Level
+b) Java example: ArrayList extends AbstractList (RuntimeException extends Exception)
+c) Selenium example: RemoteWebDriver -> ChromiumDriver -> ChromeDriver 
+ChromeDriver extends ChromiumDriver
+
+		     Interface Inheritance: SearchContext -> WebDriver
+WebDriver extends SearchContext
+
+d) Framework example: BaseClass(ProjectSpecificMethods) -> Pages & Testcase
+
+ProjectSpecificMethods extends SeleniumBase
+
+LoginPages extends ProjectSpecificMethods 
+ProjectSpecificMethods extends SeleniumBase
+
+
+
+
+What is polymorphism and give examples from your automation
+
+a) What it is? Polymorphism is Object oriented concept where single action can be transformed into multiple forms
+     Types: Overloading (compile-time) and Overriding (run-time)
+    	1) Overloading
+		a) Same method name with different arguments
+		b) Purpose: simplify verbose
+		c) Java examples: subString(int) // only start index and subString(int, int) // start and end
+		d) Selenium examples: switchTo().frame() -index,string or Name,webelement
+		e) Framework examples: locateElement(String) -> default by id, 
+                           locateElement(String, String) -> by any locator
+	2) Overriding
+		a) Override the super class method behaviour at sub class level
+		b) Purpose: when like override the functionality
+		c) Java examples: equals method in String class overrides the Object class
+		d) Selenium examples: quit method in ChromiumDriver overrides the quit method in RWD
+		e) Framework examples: BeforeMethod in registration testcase override the BeforeMethod at hooks level (default: login)
+
+
+What is abstraction and where are you using in your automation
+
+What it is? Abstraction is one of the OOPs concepts to  hide certain details and show only essential information to the user. 
+     Types: Interface, Abstract Class
+
+  1. Interface
+	Interfaces are design structure that directs what a class must do. It is placeholder for all abstract methods and it can also support concrete methods from 1.7 version with default to allow backward compatibility. In our project, we always start with interface so that everyone follow the common standards for developing methods and variables by which we can avoid ambiguity. 
+
+	
+	b) Java example: List, Set
+	c) Selenium example: SearchContext, WebDriver
+	d) Framework example: Browser , Element
+
+   2. Abstract Class
+	Contains both implemented and unimplemented (abstract) methods. Used to partially implement the interface.
+
+	a) Java example: AbstractList
+	b) Selenium example: By class
+	c) Framework example: Reporter
+
+
+
+What is Interface and where are you using in your automation
+
+Interfaces are design structure that directs what a class must do. It is placeholder for 
+all abstract methods and it can also support concrete methods from 1.7 version with default 
+to allow backward compatibility. In our project, we always start with interface so that 
+everyone follow the common standards for developing methods and variables by which we can avoid ambiguity. 
+
+In our framework, we designed the interfaces first like Browser, WebElement, WebSelect, 
+WebButton etc first and then implemented using abstract or concrete class.
+
+
